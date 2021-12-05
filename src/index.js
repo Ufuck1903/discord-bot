@@ -11,7 +11,7 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 (async () => {
   client.commands = new Map();
   client.events = new Map();
-  client.prefix = config1.prefix;
+  client.prefix = process.env.PREFIX
   await registerCommands(client, '../commands');
   await registerEvents(client, '../events');
   let x = `${process.env.TOKEN}`
