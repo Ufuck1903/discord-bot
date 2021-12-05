@@ -1,7 +1,0 @@
-{
-  "name": "discord-bot",
-  "language": "javascript",
-  "manager": "npm",
-  "token": "",
-  "prefix": "?"
-}
