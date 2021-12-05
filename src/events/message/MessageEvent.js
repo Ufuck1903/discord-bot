@@ -1,11 +1,23 @@
 const BaseEvent = require('../../utils/structures/BaseEvent');
 const guildModel = require('../../models/guildModel')
+const cleverbot = require("../../helpers/cleverbot")
 module.exports = class MessageEvent extends BaseEvent {
     constructor() {
         super('messageCreate');
     }
 
     async run(client, message) {
+        /*Clever bot function*/
+        if (message.content.toLowerCase().startsWith(`<@!${client.user.id}>`) || message.content.toLowerCase().startsWith(`<@${client.user.id}>`)) {
+            if (message.content === `<@${client.user.id}>`) return message.reply("Wrong usage ?help chatbot for more info").catch(console.error); //if only mention
+            if (message.content === `<@!${client.user.id}>`) return message.reply("Wrong usage ?help chatbot for more info").catch(console.error); //if only mention
+            const args1 = message.content.replace(`<@553677383895351296> `, "");
+            const args3 = args1.replace(`<@!553677383895351296> `, "");
+            cleverbot(args3).then(response => {
+                message.reply(response);
+            });
+        }
+        /* Custom prefix conf*/
         const guild = guildModel.findOne({_id: message.guild.id}, async (err, guild) => {
             if (!guild) {
                 try {
