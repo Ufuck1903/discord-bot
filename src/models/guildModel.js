@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const guildModel = mongoose.Schema({
-    /*
-    * its a guildModel
-    * */
+    _id: {type: String, required: true},
+    prefix: {type:String, default: "?"}
 }, {_id: false});
 module.exports = mongoose.model("guildModel", guildModel)
