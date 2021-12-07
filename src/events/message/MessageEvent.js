@@ -5,6 +5,7 @@ module.exports = class MessageEvent extends BaseEvent {
   constructor() {
     super("messageCreate");
   }
+
   async run(client, message) {
     /*Clever bot function*/
     if (
@@ -22,7 +23,9 @@ module.exports = class MessageEvent extends BaseEvent {
       const args1 = message.content.replace(`<@553677383895351296> `, "");
       const args3 = args1.replace(`<@!553677383895351296> `, "");
       cleverbot(args3).then((response) => {
-        message.reply(response);
+        message.reply(response).catch((err) => {
+          console.log(err);
+        });
       });
     }
     /* Custom prefix conf*/
