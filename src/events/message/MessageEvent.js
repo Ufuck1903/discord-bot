@@ -22,11 +22,13 @@ module.exports = class MessageEvent extends BaseEvent {
           .catch(console.error); //if only mention
       const args1 = message.content.replace(`<@553677383895351296> `, "");
       const args3 = args1.replace(`<@!553677383895351296> `, "");
-      cleverbot(args3).then((response) => {
-        message.reply(response).catch((err) => {
-          console.log(err);
+      cleverbot(args3)
+        .then((response) => {
+          message.reply(response);
+        })
+        .catch((err) => {
+          message.reply("```" + err + "```");
         });
-      });
     }
     /* Custom prefix conf*/
     const guild = guildModel.findOne(
